@@ -7,13 +7,17 @@ class GameBoard {
 
 
     this.pen = new Pen(this.unit);
+    this.check = new CheckClears()
   }
 
   init() {
     for (let i = 0; i < this.cols; i++) {
       this.board.push(Array(this.rows).fill(0).map(() => randomInt(1, NB_CANDIES)));
     }
+
+
     this.board = Object.seal(this.board);
+    this.check.all(this.board)
 
     return this;
   }

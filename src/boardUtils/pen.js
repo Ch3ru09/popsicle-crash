@@ -1,7 +1,7 @@
 class Pen {
   constructor(unit) {
     this.squareSide = unit;
-    this.radius = 10
+    this.radius = 20
   }
 
   drawSquares(rows, cols) {
@@ -28,9 +28,10 @@ class Pen {
         ctx.save()
         ctx.fillStyle = candies.getDisplayColor(candy)
         ctx.translate(i * this.squareSide, j * this.squareSide)
-        ctx.arc(this.squareSide / 2 - this.radius, this.squareSide / 2, this.radius, 0, Math.PI * 2, false)
+        ctx.beginPath()
+        ctx.arc(this.squareSide / 2, this.squareSide / 2, this.radius, 0, Math.PI * 2, false)
         ctx.fill()
-
+        ctx.closePath()
         ctx.restore()
       })
     });

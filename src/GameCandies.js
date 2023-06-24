@@ -3,11 +3,11 @@ class GameCandies {
     this.colors = ["red", "orange", "yellow", "green", "blue", "purple"]
   }
 
-  getColorId(piece) {
-    return piece & 7
+  getColorId(candy) {
+    return candy & 7
   }
 
-  getDisplayColor(piece) {
-    return this.colors[(piece & 7) - 1]
+  getDisplayColor(candy) {
+    return this.colors[(candy & 7) - 1]
   }
 }
