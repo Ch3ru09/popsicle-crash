@@ -1,6 +1,6 @@
 # Popsicle crash
 
-## This is definitely not a copy of candy crush that didn't take inspiration from the final senior project of a friend of mine (Ziying <3)
+## This is definitely not a copy of candy crush that didn't take inspiration from the senior project of a friend of mine (Ziying <3)
 
 ### _Nope, definitely not_
 
