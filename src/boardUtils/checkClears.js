@@ -37,10 +37,10 @@ class CheckClears {
     let check = 0;
     board.forEach((x, col) => {
       for (let row in x) {
+        row = Number(row)
         let [checkCol, checkRow] = this.checkCandy(col, row, board);
 
-        if (checkCol.length < 1 && checkRow.length < 1) return;
-
+        if (checkCol.length < 2 && checkRow.length < 2) continue;
 
         if (checkCol.includes(1) && checkCol.includes(-1)) {
           board[col][row] = (((board[col][row] + 1) % NB_CANDIES) + 1) ^ 7;
