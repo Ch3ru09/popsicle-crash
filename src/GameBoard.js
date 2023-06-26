@@ -3,33 +3,37 @@ class GameBoard {
     this.board = [];
     this.rows = rows;
     this.cols = cols;
-    this.unit = 60
+    this.unit = 60;
 
+    this.deltaX = (W - this.cols * this.unit) / 2;
+    this.deltaY = (H - this.rows * this.unit) / 2;
 
     this.pen = new Pen(this.unit);
-    this.check = new CheckClears()
+    this.check = new CheckClears();
+    this.mouse = new Mouse().init(this.deltaX, this.deltaY, this.unit, rows, cols);
   }
 
   init() {
     for (let i = 0; i < this.cols; i++) {
-      this.board.push(Array(this.rows).fill(0).map(() => randomInt(1, NB_CANDIES)));
+      this.board.push(
+        Array(this.rows)
+          .fill(0)
+          .map(() => randomInt(1, NB_CANDIES))
+      );
     }
 
-
     this.board = Object.seal(this.board);
-    this.check.all(this.board)
+    this.check.all(this.board);
 
     return this;
   }
 
   draw() {
-    ctx.translate((W - this.cols * this.unit) / 2, (H - this.rows * this.unit) / 2);
+    ctx.translate(this.deltaX, this.deltaY);
 
-    this.pen
-      .drawSquares(this.rows, this.cols)
-      .drawPopsicles(this.board);
+    this.pen.drawSquares(this.rows, this.cols).drawPopsicles(this.board);
 
-    ctx.translate(-(W - this.cols * this.unit) / 2, -(H - this.rows * this.unit) / 2);
+    ctx.translate(-this.deltaX, -this.deltaY);
   }
 }
 

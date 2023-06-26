@@ -34,7 +34,6 @@ class CheckClears {
   }
 
   all(board) {
-    console.log("loop");
     let check = 0;
     board.forEach((x, col) => {
       for (let row in x) {
