@@ -1,6 +1,7 @@
 class Mouse {
   constructor() {
     this.boardPosition = { x: 0, y: 0 };
+    this.down = false;
   }
 
   init(deltaX, deltaY, unit, rows, cols) {
@@ -22,6 +23,18 @@ class Mouse {
 
       this.boardPosition = { x, y };
     });
+
+    document.addEventListener("mousedown", () => {
+      this.down = true;
+    });
+
+    document.addEventListener("mouseup", () => {
+      this.down = false;
+    })
+
+    document.addEventListener("onclick", () => {
+
+    })
   }
 }
 

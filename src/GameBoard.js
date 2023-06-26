@@ -3,7 +3,7 @@ class GameBoard {
     this.board = [];
     this.rows = rows;
     this.cols = cols;
-    this.unit = 60;
+    this.unit = Math.min(H / rows / (3 / 2), 60);
 
     this.deltaX = (W - this.cols * this.unit) / 2;
     this.deltaY = (H - this.rows * this.unit) / 2;
@@ -11,6 +11,15 @@ class GameBoard {
     this.pen = new Pen(this.unit);
     this.check = new CheckClears();
     this.mouse = new Mouse().init(this.deltaX, this.deltaY, this.unit, rows, cols);
+  }
+
+  resize() {
+    this.unit = Math.min(H / this.rows / (3 / 2), 60);
+
+    this.deltaX = (W - this.cols * this.unit) / 2;
+    this.deltaY = (H - this.rows * this.unit) / 2;
+
+    return this
   }
 
   init() {
@@ -29,6 +38,8 @@ class GameBoard {
   }
 
   draw() {
+    ctx.clearRect(0, 0, W, H)
+
     ctx.translate(this.deltaX, this.deltaY);
 
     this.pen.drawSquares(this.rows, this.cols).drawPopsicles(this.board);

@@ -6,7 +6,7 @@
 
 #
 
-PS: I'll be using the pronoun "He" because it's just simpler to write than "He/She/It/They".
+PS: I'll be using the pronoun "He" for the player because it's just simpler to write than "He/She/It/They".
 
 #
 
@@ -26,7 +26,7 @@ When the level begins, the player is met with a grid of candies that he has to m
 
 ### 1.2 Board setup
 
-When I first thought of making this game, I immediately thought of how to store the game state in a grid inspired by other grid games such as chess.
+When I first thought of making this game from scratch, I immediately thought of how to store the game state in a grid inspired by other grid games such as chess.
 
 To represent a chess game using a bitmap array, there's basically 2 solutions: using a 2d array or using a single line array and modulo operations.
 

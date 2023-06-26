@@ -8,7 +8,7 @@ class Pen {
     ctx.save();
     ctx.fillStyle = "#000";
     ctx.strokeStyle = "#000";
-    ctx.lineWidth = 3;
+    ctx.lineWidth = 2;
 
     for (let i = 0; i < cols; i++) {
       for (let j = 0; j < rows; j++) {
