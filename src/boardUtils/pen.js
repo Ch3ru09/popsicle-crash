@@ -2,6 +2,9 @@ class Pen {
   constructor(unit) {
     this.squareSide = unit;
     this.radius = 20
+
+    this.moving = false;
+    this.animation = ANIMATION_FRAMES;
   }
 
   drawSquares(rows, cols) {

@@ -11,7 +11,7 @@ class CheckClears {
 
           if (col + i * 2 >= 0 && col + i * 2 < board.length) {
             if (current == candies.getColorId(board[col + i * 2][row])) {
-              checkRow.push(i * 2);
+              checkCol.push(i * 2);
             }
           }
         }

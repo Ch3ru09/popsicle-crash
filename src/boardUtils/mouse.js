@@ -1,10 +1,11 @@
 class Mouse {
   constructor() {
-    this.boardPosition = { x: 0, y: 0 };
+    this.boardPosition = [-1, -1];
     this.down = false;
+    this.clicked = null;
   }
 
-  init(deltaX, deltaY, unit, rows, cols) {
+  init(deltaX, deltaY, unit, rows, cols, board, checkCandy) {
     document.addEventListener("mousemove", (e) => {
       // the lazy destructuring (I have no clue why i wanted to do this)
       let { clientX: x, clientY: y } = e;
@@ -21,7 +22,7 @@ class Mouse {
         x = y = -1;
       }
 
-      this.boardPosition = { x, y };
+      this.boardPosition = [x, y];
     });
 
     document.addEventListener("mousedown", () => {
@@ -32,7 +33,48 @@ class Mouse {
       this.down = false;
     })
 
-    document.addEventListener("onclick", () => {
+    document.addEventListener("click", () => {
+      if (this.clicked == null) {
+        this.clicked = this.boardPosition
+        return
+      }
+      if (JSON.stringify(this.clicked) == JSON.stringify(this.boardPosition)) {
+        this.clicked = null
+        return
+      }
+      // initial x and initial y
+      let [ix, iy] = this.clicked
+
+      let [fx, fy] = this.boardPosition
+
+
+      let dx = Math.abs(fx - ix);
+      let dy = Math.abs(fy - iy);
+
+      if ((dx == 1 && dy == 0) || (dx == 0 && dy == 1)) {
+        [board[ix][iy], board[fx][fy]] = [board[fx][fy], board[ix][iy]]
+      } else {
+        this.clicked = null;
+        return
+      }
+
+      let check = 0;
+      for (let x of [[ix, iy], [fx, fy]]) {
+        let [checkCol, checkRow] = checkCandy(x[0], x[1], board)
+
+        if (checkCol.length > 1 || checkRow.length > 1) {
+          check++
+        }
+      }
+
+      this.clicked = null;
+      if (check > 0) {
+        this.moving = true
+        animate(board)
+        return
+      }
+
+      [board[ix][iy], board[fx][fy]] = [board[fx][fy], board[ix][iy]]
 
     })
   }

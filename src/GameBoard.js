@@ -10,7 +10,8 @@ class GameBoard {
 
     this.pen = new Pen(this.unit);
     this.check = new CheckClears();
-    this.mouse = new Mouse().init(this.deltaX, this.deltaY, this.unit, rows, cols);
+    this.mouse = new Mouse()
+      .init(this.deltaX, this.deltaY, this.unit, rows, cols, this.board, this.check.checkCandy);
   }
 
   resize() {
