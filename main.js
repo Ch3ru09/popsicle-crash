@@ -1,7 +1,11 @@
 function animate() {
   board.draw();
 
-  // requestAnimationFrame(animate);
+  if (board.pen.animation > 0) {
+    console.log("a");
+    requestAnimationFrame(animate);
+    board.pen.animation--;
+  }
 }
 animate();
 

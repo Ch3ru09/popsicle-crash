@@ -5,9 +5,8 @@ class Mouse {
     this.clicked = null;
   }
 
-  init(deltaX, deltaY, unit, rows, cols, board, checkCandy) {
+  init(deltaX, deltaY, unit, rows, cols, board, checkCandy, pen) {
     document.addEventListener("mousemove", (e) => {
-      // the lazy destructuring (I have no clue why i wanted to do this)
       let { clientX: x, clientY: y } = e;
       x -= deltaX;
       y -= deltaY;
@@ -31,52 +30,55 @@ class Mouse {
 
     document.addEventListener("mouseup", () => {
       this.down = false;
-    })
+    });
 
     document.addEventListener("click", () => {
       if (this.clicked == null) {
-        this.clicked = this.boardPosition
-        return
+        this.clicked = this.boardPosition;
+        return;
       }
       if (JSON.stringify(this.clicked) == JSON.stringify(this.boardPosition)) {
-        this.clicked = null
-        return
+        this.clicked = null;
+        return;
       }
       // initial x and initial y
-      let [ix, iy] = this.clicked
+      let [ix, iy] = this.clicked;
 
-      let [fx, fy] = this.boardPosition
-
+      let [fx, fy] = this.boardPosition;
 
       let dx = Math.abs(fx - ix);
       let dy = Math.abs(fy - iy);
 
       if ((dx == 1 && dy == 0) || (dx == 0 && dy == 1)) {
-        [board[ix][iy], board[fx][fy]] = [board[fx][fy], board[ix][iy]]
+        [board[ix][iy], board[fx][fy]] = [board[fx][fy], board[ix][iy]];
       } else {
         this.clicked = null;
-        return
+        return;
       }
 
       let check = 0;
-      for (let x of [[ix, iy], [fx, fy]]) {
-        let [checkCol, checkRow] = checkCandy(x[0], x[1], board)
+      for (let x of [
+        [ix, iy],
+        [fx, fy],
+      ]) {
+        let [checkCol, checkRow] = checkCandy(x[0], x[1], board);
 
         if (checkCol.length > 1 || checkRow.length > 1) {
-          check++
+          check++;
         }
       }
 
       this.clicked = null;
       if (check > 0) {
-        this.moving = true
-        animate(board)
-        return
+        pen.moving = [JSON.stringify([ix, iy]), JSON.stringify([fx, fy])];
+
+        pen.animation = ANIMATION_FRAMES;
+        animate(board);
+        return;
       }
 
-      [board[ix][iy], board[fx][fy]] = [board[fx][fy], board[ix][iy]]
-
-    })
+      [board[ix][iy], board[fx][fy]] = [board[fx][fy], board[ix][iy]];
+    });
   }
 }
 
