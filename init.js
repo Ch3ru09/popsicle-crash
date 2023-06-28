@@ -9,7 +9,7 @@ const ctx = canvas.getContext("2d");
 
 // Constants
 const NB_CANDIES = 6;
-const ANIMATION_FRAMES = 30
+const ANIMATION_FRAMES = 5;
 
 // Classes
 const candies = new GameCandies();
@@ -17,9 +17,14 @@ const state = new GameState();
 const board = new GameBoard(10, 10).init();
 
 // Utils
-window.addEventListener("resize", () => {
-  H = canvas.height = innerHeight;
-  W = canvas.width = innerWidth;
+window.addEventListener(
+  "resize",
+  () => {
+    H = canvas.height = innerHeight;
+    W = canvas.width = innerWidth;
 
-  board.resize().draw()
-}, false);
+    board.resize().draw();
+  },
+  false
+);
+

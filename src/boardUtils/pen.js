@@ -55,11 +55,7 @@ class Pen {
 
     other = JSON.parse(this.moving[other]);
 
-    this.animation = 0;
-
     let res = [x + ((i - other[0]) * -1 * this.squareSide * this.animation) / ANIMATION_FRAMES, y + ((j - other[1]) * -1 * this.squareSide * this.animation) / ANIMATION_FRAMES];
-
-    console.log(res);
 
     return res;
   }

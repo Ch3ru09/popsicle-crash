@@ -2,6 +2,7 @@ class Mouse {
   constructor() {
     this.boardPosition = [-1, -1];
     this.down = false;
+    this.waiting = [false, () => {}];
     this.clicked = null;
   }
 
@@ -51,6 +52,10 @@ class Mouse {
 
       if ((dx == 1 && dy == 0) || (dx == 0 && dy == 1)) {
         [board[ix][iy], board[fx][fy]] = [board[fx][fy], board[ix][iy]];
+        pen.moving = [JSON.stringify([ix, iy]), JSON.stringify([fx, fy])];
+
+        pen.animation = ANIMATION_FRAMES;
+        animate(board);
       } else {
         this.clicked = null;
         return;
@@ -69,16 +74,20 @@ class Mouse {
       }
 
       this.clicked = null;
-      if (check > 0) {
-        pen.moving = [JSON.stringify([ix, iy]), JSON.stringify([fx, fy])];
+      if (check < 1) {
+        this.waiting = [
+          true,
+          () => {
+            [board[ix][iy], board[fx][fy]] = [board[fx][fy], board[ix][iy]];
+          },
+        ];
 
-        pen.animation = ANIMATION_FRAMES;
-        animate(board);
+        [board[ix][iy], board[fx][fy]] = [board[fx][fy], board[ix][iy]];
+
         return;
       }
-
-      [board[ix][iy], board[fx][fy]] = [board[fx][fy], board[ix][iy]];
     });
+    return this;
   }
 }
 
