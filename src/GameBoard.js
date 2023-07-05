@@ -9,9 +9,19 @@ class GameBoard {
     this.deltaY = (H - this.rows * this.unit) / 2;
 
     this.pen = new Pen(this.unit);
-    this.check = new CheckClears();
-    this.mouse = new Mouse()
-      .init(this.deltaX, this.deltaY, this.unit, rows, cols, this.board, this.check.checkCandy, this.pen);
+    this.check = new Checker();
+    this.clearer = new Clearer();
+    this.mouse = new Mouse().init(
+      this.deltaX,
+      this.deltaY,
+      this.unit,
+      rows,
+      cols,
+      this.board,
+      this.check.checkCandy,
+      this.clearer.pop.bind(this.clearer),
+      this.pen
+    );
   }
 
   resize() {
@@ -20,7 +30,7 @@ class GameBoard {
     this.deltaX = (W - this.cols * this.unit) / 2;
     this.deltaY = (H - this.rows * this.unit) / 2;
 
-    return this
+    return this;
   }
 
   init() {
@@ -39,13 +49,11 @@ class GameBoard {
   }
 
   draw() {
-    ctx.clearRect(0, 0, W, H)
+    ctx.clearRect(0, 0, W, H);
 
     ctx.translate(this.deltaX, this.deltaY);
 
-    this.pen
-      .drawSquares(this.rows, this.cols)
-      .drawPopsicles(this.board);
+    this.pen.drawSquares(this.rows, this.cols).drawPopsicles(this.board);
 
     ctx.translate(-this.deltaX, -this.deltaY);
   }

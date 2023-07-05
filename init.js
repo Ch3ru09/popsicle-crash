@@ -9,7 +9,7 @@ const ctx = canvas.getContext("2d");
 
 // Constants
 const NB_CANDIES = 6;
-const ANIMATION_FRAMES = 5;
+const ANIMATION_FRAMES = 10;
 
 // Classes
 const candies = new GameCandies();

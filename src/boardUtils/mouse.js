@@ -4,9 +4,10 @@ class Mouse {
     this.down = false;
     this.waiting = [false, () => {}];
     this.clicked = null;
+    this.poppers = [];
   }
 
-  init(deltaX, deltaY, unit, rows, cols, board, checkCandy, pen) {
+  init(deltaX, deltaY, unit, rows, cols, board, checkCandy, pop, pen) {
     document.addEventListener("mousemove", (e) => {
       let { clientX: x, clientY: y } = e;
       x -= deltaX;
@@ -57,24 +58,35 @@ class Mouse {
         pen.animation = ANIMATION_FRAMES;
         animate(board);
       } else {
-        this.clicked = null;
+        this.clicked = [fx, fy];
         return;
       }
 
-      let check = 0;
+      let check = [];
       for (let x of [
         [ix, iy],
         [fx, fy],
       ]) {
         let [checkCol, checkRow] = checkCandy(x[0], x[1], board);
+        let connected = 1;
 
-        if (checkCol.length > 1 || checkRow.length > 1) {
-          check++;
+        let longer = checkCol.length > checkRow.length ? checkCol : checkRow;
+        let other = checkCol.length <= checkRow.length ? checkCol : checkRow;
+
+        connected += checkCol.length > checkRow.length ? checkCol.length : checkRow.length;
+        if (other.includes(2) || other.includes(-2)) {
+        }
+
+        if (checkCol.length > 1) {
+          check.push([...x, 0, checkCol, connected]);
+        }
+        if (checkRow.length > 1) {
+          check.push([...x, 1, checkRow, connected]);
         }
       }
 
       this.clicked = null;
-      if (check < 1) {
+      if (check.length < 1) {
         this.waiting = [
           true,
           () => {
@@ -82,11 +94,16 @@ class Mouse {
           },
         ];
 
-        [board[ix][iy], board[fx][fy]] = [board[fx][fy], board[ix][iy]];
-
         return;
       }
+
+      this.poppers.push(() => {
+        check.forEach((x) => {
+          pop(...x);
+        });
+      });
     });
+
     return this;
   }
 }

@@ -13,12 +13,10 @@ class Pen {
     ctx.strokeStyle = "#000";
     ctx.lineWidth = 2;
 
-    for (let i = 0; i < cols; i++) {
-      for (let j = 0; j < rows; j++) {
-        ctx.rect(i * this.squareSide, j * this.squareSide, this.squareSide, this.squareSide);
-        ctx.stroke();
-      }
-    }
+    ctx.beginPath();
+    ctx.rect(0, 0, this.squareSide * cols, this.squareSide * rows);
+    ctx.stroke();
+    ctx.closePath();
 
     ctx.restore();
 
@@ -55,7 +53,10 @@ class Pen {
 
     other = JSON.parse(this.moving[other]);
 
-    let res = [x + ((i - other[0]) * -1 * this.squareSide * this.animation) / ANIMATION_FRAMES, y + ((j - other[1]) * -1 * this.squareSide * this.animation) / ANIMATION_FRAMES];
+    let res = [
+      x + ((i - other[0]) * -1 * this.squareSide * this.animation) / ANIMATION_FRAMES,
+      y + ((j - other[1]) * -1 * this.squareSide * this.animation) / ANIMATION_FRAMES,
+    ];
 
     return res;
   }

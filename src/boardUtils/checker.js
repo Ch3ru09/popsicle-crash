@@ -1,4 +1,4 @@
-class CheckClears {
+class Checker {
   checkCandy(col, row, board) {
     const checkCol = [];
     const checkRow = [];
@@ -37,23 +37,27 @@ class CheckClears {
     let check = 0;
     board.forEach((x, col) => {
       for (let row in x) {
-        row = Number(row)
+        row = Number(row);
         let [checkCol, checkRow] = this.checkCandy(col, row, board);
 
         if (checkCol.length < 2 && checkRow.length < 2) continue;
 
         if (checkCol.includes(1) && checkCol.includes(-1)) {
           board[col][row] = (((board[col][row] + 1) % NB_CANDIES) + 1) ^ 7;
-          check++
-
+          board[(col + 1) % board.length][row] = (((board[col][row] + 1) % NB_CANDIES) + 1) ^ 7;
+          board[col][(row + 1) % x.length] = (((board[col][row] + 1) % NB_CANDIES) + 1) ^ 7;
+          check++;
         } else if (checkRow.includes(1) && checkRow.includes(-1)) {
           board[col][row] = (((board[col][row] + 1) % NB_CANDIES) + 1) ^ 7;
-          check++
+          board[(col + 1) % board.length][row] = (((board[col][row] + 1) % NB_CANDIES) + 1) ^ 7;
+          board[col][(row + 1) % x.length] = (((board[col][row] + 1) % NB_CANDIES) + 1) ^ 7;
+          check++;
         }
-      };
+      }
     });
     if (check > 0) {
       this.all(board);
     }
   }
 }
+
