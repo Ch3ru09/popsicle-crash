@@ -33,7 +33,8 @@ class Mouse {
       if (JSON.stringify(this.down) !== JSON.stringify(this.boardPosition)) {
         this.clicked = null;
         this.pulling = true;
-        console.log(this.down, this.boardPosition);
+        this.checker(...this.down, ...this.boardPosition, utils);
+        this.down = null;
       }
     });
 
@@ -44,7 +45,6 @@ class Mouse {
       }
 
       this.down = this.boardPosition;
-      console.log(this.down);
     });
 
     document.addEventListener("mouseup", () => {
