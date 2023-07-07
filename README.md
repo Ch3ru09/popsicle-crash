@@ -6,15 +6,15 @@
 
 #
 
-PS: I'll be using the pronoun "He" for the player because it's just simpler to write than "He/She/It/They".
+PS: I'll be using the pronoun "He" for the player because it's just simpler to write than "He/She/It/They". It's also because I couldn't care less.
 
 #
 
-## 1. Base idea and board setup
+## <u>**1. Base idea and board setup**</u>
 
 <br>
 
-### 1.1 Idea of the game
+### <u>1.1 Idea of the game</u>
 
 The base idea of candy crush is pretty simple and know to most.
 
@@ -24,7 +24,7 @@ When the level begins, the player is met with a grid of candies that he has to m
 
 <br>
 
-### 1.2 Board setup
+### <u>1.2 Board setup</u>
 
 When I first thought of making this game from scratch, I immediately thought of how to store the game state in a grid inspired by other grid games such as chess.
 
@@ -42,7 +42,7 @@ My reasoning behind this is that when the game is played, the items in the colum
 
 <br>
 
-### 1.3 Identifying candies
+### <u>1.3 Identifying candies</u>
 
 Since it's a bitmap, every item in the arrays are represented using a number whose bits are arranged to represent different things
 
@@ -61,11 +61,13 @@ This, for example, is to represent a red candy in a level 1 jelly
 
 <br>
 
-### 1.4 Candy generation
+### <u>1.4 Candy generation</u>
 
 The method to generate candies is pretty simple: random integer from 1 to 7 (0 being an empty square)
 
-### 1.5 Clearing candies
+<br>
+
+### <u>1.5 Clearing candies</u>
 
 The candy clearing detection is only on the candies that moved either from player action or falling.
 
