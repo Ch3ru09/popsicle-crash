@@ -5,6 +5,8 @@ class Pen {
 
     this.moving = [];
     this.animation = 0;
+
+    this.initialFallAnimation = FALL_ANIMATION_FRAMES;
   }
 
   drawSquares(rows, cols) {
@@ -24,6 +26,10 @@ class Pen {
   }
 
   drawPopsicles(board) {
+    if (this.initialFallAnimation > 0) {
+      ctx.translate(0, (-this.squareSide * (board[0].length + 5) * this.initialFallAnimation) / FALL_ANIMATION_FRAMES);
+    }
+
     board.forEach((col, i) => {
       col.forEach((candy, j) => {
         ctx.save();
@@ -42,6 +48,7 @@ class Pen {
         ctx.restore();
       });
     });
+    ctx.translate(0, (this.squareSide * (board[0].length + 5) * this.initialFallAnimation) / FALL_ANIMATION_FRAMES);
   }
 
   checkMoving(x, y, i, j) {
@@ -60,6 +67,8 @@ class Pen {
 
     return res;
   }
+
+  getDelta() {}
 }
 
 function randomInt(min, max) {

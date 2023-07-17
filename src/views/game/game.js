@@ -1,6 +1,11 @@
 function animate() {
   board.draw();
 
+  if (board.pen.initialFallAnimation > 0) {
+    requestAnimationFrame(animate);
+    board.pen.initialFallAnimation--;
+  }
+
   if (board.pen.animation > 0) {
     requestAnimationFrame(animate);
     board.pen.animation--;
