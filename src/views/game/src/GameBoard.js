@@ -53,7 +53,7 @@ class GameBoard {
 
     ctx.translate(this.deltaX, this.deltaY);
 
-    this.pen.drawSquares(this.rows, this.cols).drawPopsicles(this.board);
+    this.pen.drawSquare(this.rows, this.cols).drawPopsicles(this.board, this.deltaY);
 
     ctx.translate(-this.deltaX, -this.deltaY);
   }

@@ -10,7 +10,7 @@ const ctx = canvas.getContext("2d");
 // Constants
 const NB_CANDIES = 6;
 const ANIMATION_FRAMES = 10;
-const FALL_ANIMATION_FRAMES = 25;
+const FALL_ANIMATION_FRAMES = 35;
 
 // Classes
 const candies = new GameCandies();
@@ -28,4 +28,12 @@ window.addEventListener(
   },
   false
 );
+
+function easeInOut(t) {
+  const i = {
+    x: (1 - t) * (t * t) + t * ((1 - t) * t + t * (1 - t + t)),
+    y: (1 - t) * ((1 - t) * t + t * (1 - t)) + t * ((1 - t) * (1 - t) + t * t),
+  };
+  return i.x;
+}
 
